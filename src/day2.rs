@@ -13,10 +13,10 @@ pub fn part1(input: &str) -> i32 {
         map.insert(c, 1);
       }
     }
-    if map.values().any(|e| *e == 2) {
+    if map.values().any(|&e| e == 2) {
       twos += 1;
     }
-    if map.values().any(|e| *e == 3) {
+    if map.values().any(|&e| e == 3) {
       threes += 1;
     }
   }
@@ -26,7 +26,7 @@ pub fn part1(input: &str) -> i32 {
 #[aoc(day2, part2)]
 pub fn part2(input: &str) -> String {
   if let Some((s1, _, id)) = find_similar_ids(input) {
-    return s1.chars().enumerate().filter(|(i, _)| *i != id).map(|(_, c)| c).collect::<String>();
+    return s1.chars().enumerate().filter(|&(i, _)| i != id).map(|(_, c)| c).collect::<String>();
   }
   panic!("input did not contain two ids differing by only one char");
 }
