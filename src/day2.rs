@@ -13,10 +13,10 @@ pub fn part1(input: &str) -> i32 {
         map.insert(c, 1);
       }
     }
-    if let Some(_) = map.values().filter(|e| **e == 2).last() {
+    if map.values().any(|e| *e == 2) {
       twos += 1;
     }
-    if let Some(_) = map.values().filter(|e| **e == 3).last() {
+    if map.values().any(|e| *e == 3) {
       threes += 1;
     }
   }
