@@ -24,9 +24,5 @@ pub fn part1(input: &str) -> usize {
       }
     }
   }
-  let mut counter = 0;
-  for x in fabric.iter() {
-    counter += x.iter().filter(|&&e| e > 1).count();
-  }
-  counter
+  fabric.iter().map(|x| x.iter().filter(|&&e| e > 1).count()).sum()
 }
