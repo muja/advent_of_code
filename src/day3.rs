@@ -130,3 +130,59 @@ pub fn part1_regex(input: &str) -> usize {
   }
   fabric.iter().map(|x| x.iter().filter(|&&e| e > 1).count()).sum()
 }
+
+#[aoc(day3, part2, Unoptimized)]
+pub fn part2_unoptimized(input: &str) -> isize {
+  let mut fabric = [[0usize; 1000]; 1000];
+  let all: Vec<Claim> = input.lines().map(|line| line.parse().unwrap()).collect();
+  for &Claim(_, x, y, w, h) in &all {
+    for i in 0..w {
+      for j in 0..h {
+        fabric[x+i][y+j] += 1;
+      }
+    }
+  }
+  'outer:
+  for Claim(id, x, y, w, h) in all {
+    for i in 0..w {
+      for j in 0..h {
+        if fabric[x+i][y+j] != 1 {
+          continue 'outer;
+        }
+      }
+    }
+    return id;
+  }
+  panic!("None found");
+}
+
+#[aoc(day3, part2, PseudoOptimized)]
+pub fn part2(input: &str) -> isize {
+  let mut fabric = [[0usize; 1000]; 1000];
+  // I tried to eagerly filter impossible claims, hoping it would reduce
+  // the time complexity, however, it had the opposite effect,
+  // Not entirely sure, why yet.
+  input.lines().map(|line| line.parse::<Claim>().unwrap()).filter(|claim| {
+    let Claim(_, x, y, w, h) = *claim;
+    let mut possible = true;
+    for i in 0..w {
+      for j in 0..h {
+        if fabric[x+i][y+j] != 0 {
+          possible = false;
+        }
+        fabric[x+i][y+j] += 1;
+      }
+    }
+    possible
+  }).collect::<Vec<Claim>>().into_iter().find(|claim| {
+    let Claim(_, x, y, w, h) = *claim;
+    for i in 0..w {
+      for j in 0..h {
+        if fabric[x+i][y+j] != 1 {
+          return false;
+        }
+      }
+    }
+    true
+  }).expect("none found").0
+}
