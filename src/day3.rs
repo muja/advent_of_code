@@ -52,10 +52,7 @@ pub fn part1_map(input: &str) -> usize {
   }) {
     for i in 0..w {
       for j in 0..h {
-        let key = (x+i, y+j);
-        if let Some(i) = fabric.insert(key, 1) {
-          fabric.insert(key, i + 1);
-        }
+        *fabric.entry((x+i, y+j)).or_default() += 1
       }
     }
   }
