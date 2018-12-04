@@ -89,7 +89,7 @@ impl FromStr for Claim {
 #[aoc(day3, part1, Claim)]
 pub fn part1_claim(input: &str) -> usize {
   let mut fabric = [[0usize; 1000]; 1000];
-  for Claim(_, x, y, w, h) in input.lines().map(|line| line.parse::<Claim>().unwrap()) {
+  for Claim(_, x, y, w, h) in input.lines().map(|line| line.parse().unwrap()) {
     for i in 0..w {
       for j in 0..h {
         fabric[x+i][y+j] += 1;
@@ -121,7 +121,7 @@ impl FromStr for RgxClaim {
 #[aoc(day3, part1, Regex)]
 pub fn part1_regex(input: &str) -> usize {
   let mut fabric = [[0usize; 1000]; 1000];
-  for RgxClaim(_, x, y, w, h) in input.lines().map(|line| line.parse::<RgxClaim>().unwrap()) {
+  for RgxClaim(_, x, y, w, h) in input.lines().map(|line| line.parse().unwrap()) {
     for i in 0..w {
       for j in 0..h {
         fabric[x+i][y+j] += 1;
