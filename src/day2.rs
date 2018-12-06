@@ -60,5 +60,5 @@ fn find_single_difference_id(s1: &str, s2: &str) -> Option<usize> {
             differing = Some(i);
         }
     }
-    return differing;
+    differing
 }

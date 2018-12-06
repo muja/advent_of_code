@@ -12,7 +12,7 @@ pub fn part1(input: &str) -> usize {
 
         // let [x, y] = ... unfortunately not possible
         let x_y: Vec<usize> = pos
-            .split(",")
+            .split(',')
             .map(|e| e.parse::<usize>().unwrap())
             .collect();
         let x = x_y[0];
@@ -20,7 +20,7 @@ pub fn part1(input: &str) -> usize {
 
         // let [w, h] = ... unfortunately not possible
         let w_h: Vec<usize> = area
-            .split("x")
+            .split('x')
             .map(|e| e.parse::<usize>().unwrap())
             .collect();
         let w = w_h[0];
@@ -50,7 +50,7 @@ pub fn part1_map(input: &str) -> usize {
 
         // let [x, y] = ... unfortunately not possible
         let x_y: Vec<usize> = pos
-            .split(",")
+            .split(',')
             .map(|e| e.parse::<usize>().unwrap())
             .collect();
         let x = x_y[0];
@@ -58,7 +58,7 @@ pub fn part1_map(input: &str) -> usize {
 
         // let [w, h] = ... unfortunately not possible
         let w_h: Vec<usize> = area
-            .split("x")
+            .split('x')
             .map(|e| e.parse::<usize>().unwrap())
             .collect();
         let w = w_h[0];
@@ -80,7 +80,7 @@ impl FromStr for Claim {
     type Err = &'static str;
 
     fn from_str(line: &str) -> Result<Self, Self::Err> {
-        let (id, pos_and_area) = line.split_at(line.find("@").ok_or("err at @")?);
+        let (id, pos_and_area) = line.split_at(line.find('@').ok_or("err at @")?);
         let id = id
             .split_at(1)
             .1
@@ -88,15 +88,15 @@ impl FromStr for Claim {
             .parse()
             .map_err(|_| "err at id.split")?;
 
-        let (pos, area) = pos_and_area.split_at(pos_and_area.find(":").ok_or("err at :")?);
+        let (pos, area) = pos_and_area.split_at(pos_and_area.find(':').ok_or("err at :")?);
         let pos = pos.trim();
         let area = area.trim();
 
-        let (x, y) = pos.split_at(pos.find(",").ok_or("err at (x, y)")?);
+        let (x, y) = pos.split_at(pos.find(',').ok_or("err at (x, y)")?);
         let x = x.split_at(1).1.trim().parse().map_err(|_| "err at x")?;
         let y = y.split_at(1).1.trim().parse().map_err(|_| "err at y")?;
 
-        let (w, h) = area.split_at(area.find("x").ok_or("err at (w, h)")?);
+        let (w, h) = area.split_at(area.find('x').ok_or("err at (w, h)")?);
         let w = w.split_at(1).1.trim().parse().map_err(|_| "err at w")?;
         let h = h.split_at(1).1.trim().parse().map_err(|_| "err at h")?;
         Ok(Claim(id, x, y, w, h))

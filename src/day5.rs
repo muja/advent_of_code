@@ -4,7 +4,7 @@ fn part1(input: &str) -> usize {
 }
 
 #[aoc(day5, part2)]
-fn part2<'a>(input: &str) -> usize {
+fn part2(input: &str) -> usize {
     let mut iters = Vec::new();
     for i in 0..26 {
         iters.push(
@@ -37,5 +37,5 @@ fn length_after_dissolve(it: impl std::iter::Iterator<Item = char>, cap: usize) 
 }
 
 fn swap_case(chr: char) -> char {
-    (chr as u8 ^ 0b100000) as char
+    (chr as u8 ^ 0b0010_0000) as char
 }

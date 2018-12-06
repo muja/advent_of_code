@@ -5,7 +5,7 @@ pub fn part1(input: &str) -> i32 {
     let grid = guard_asleep_table(input);
     let (id, minutes) = grid
         .into_iter()
-        .max_by_key(|(_, v1)| v1.into_iter().map(|(id, m)| m - id).sum::<i32>())
+        .max_by_key(|(_, v1)| v1.iter().map(|(id, m)| m - id).sum::<i32>())
         .unwrap();
     let mut frequency = [0i32; 60];
     for (start, end) in minutes {
